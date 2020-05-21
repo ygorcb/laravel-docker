@@ -5,7 +5,12 @@ services:
                 build: .docker/nginx
                 ports:
                         - "780:80"
+                volumes:
+                        - .:/var/www
 
         app:
                 image: php:7.3-fpm-alpine
+                volumes:
+                        - .:/var/www
+
 
