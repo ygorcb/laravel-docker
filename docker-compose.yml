@@ -9,7 +9,7 @@ services:
                         - .:/var/www
 
         app:
-                image: php:7.3-fpm-alpine
+                build: . 
                 volumes:
                         - .:/var/www
 
