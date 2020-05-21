@@ -1,10 +1,14 @@
+FROM composer as deps
+
+ADD . /app/
+RUN composer install
+
 FROM php:7.3-fpm-alpine 
 
 COPY . /var/www/
 WORKDIR /var/www/
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && composer install \
-    && cp .env.example .env \
+COPY --from=deps /app/vendor/ vendor/
+RUN cp .env.example .env \
     && php artisan key:generate \
     && docker-php-ext-install pdo_mysql
 ENV DB_HOST=database DB_USERNAME=app DB_PASSWORD=123456
