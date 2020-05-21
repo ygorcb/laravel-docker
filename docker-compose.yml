@@ -5,3 +5,7 @@ services:
                 image: nginx:1.18-alpine
                 ports:
                         - "780:80"
+
+        app:
+                image: php:7.3-fpm-alpine
+
