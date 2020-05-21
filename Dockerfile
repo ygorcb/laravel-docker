@@ -8,3 +8,4 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
     && php artisan key:generate \
     && docker-php-ext-install pdo_mysql
 ENV DB_HOST=database DB_USERNAME=app DB_PASSWORD=123456
+RUN chmod a+w -R storage/*
