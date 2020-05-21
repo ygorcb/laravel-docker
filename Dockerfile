@@ -1,10 +1,10 @@
 FROM php:7.3-fpm-alpine 
 
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 COPY . /var/www/
 WORKDIR /var/www/
-RUN composer install 
-RUN cp .env.example .env
-RUN php artisan key:generate
-RUN docker-php-ext-install pdo_mysql
-RUN php artisan migrate
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+    && composer install \
+    && cp .env.example .env \
+    && php artisan key:generate \
+    && docker-php-ext-install pdo_mysql
+ENV DB_HOST=database DB_USERNAME=app DB_PASSWORD=123456
