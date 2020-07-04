@@ -10,20 +10,20 @@ steps:
   
 - id: "Instalando dependências"
   name: 'gcr.io/cloud-builders/docker'
-  args: ['exec', '-t','app','composer','install']
+  args: ['exec', '-t','workspace_app','composer','install']
 
 - id: "Gerando arquivos de configuração do Laravel"
   name: 'gcr.io/cloud-builders/docker'
-  args: ['exec', '-t','app','cp','.env.example', '.env']
+  args: ['exec', '-t','workspace_app','cp','.env.example', '.env']
 
 - id: "Gerando chave do Laravel"
   name: 'gcr.io/cloud-builders/docker'
-  args: ['exec', '-t','app','php','/var/www/artisan', 'key:generate']
+  args: ['exec', '-t','workspace_app','php','/var/www/artisan', 'key:generate']
 
 - id: "Migrando banco de dados"
   name: 'gcr.io/cloud-builders/docker'
-  args: ['exec', '-t','app','php','/var/www/artisan', 'migrate']
+  args: ['exec', '-t','workspace_app','php','/var/www/artisan', 'migrate']
 
 - id: "Executando testes"
   name: 'gcr.io/cloud-builders/docker'
-  args: ['exec', '-t','app','php','/var/www/vendor/bin/phpunit', '-c','/var/www/phpunit.xml']
+  args: ['exec', '-t','workspace_app','php','/var/www/vendor/bin/phpunit', '-c','/var/www/phpunit.xml']
