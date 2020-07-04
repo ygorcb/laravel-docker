@@ -5,6 +5,6 @@ steps:
   args: ['-f','docker-compose.cloudbuild.yml','up','-d' ]
 
 - id: "Verificando dependências"
-  name: 'gcr.io/$cloud-builders/docker'
+  name: 'gcr.io/cloud-builders/docker'
   args: ['ps']
   
