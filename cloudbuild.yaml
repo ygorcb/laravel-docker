@@ -9,21 +9,21 @@ steps:
   args: ['ps']
   
 - id: "Instalando dependências"
-  name: 'gcr.io/cloud-builders/docker-compose'
+  name: 'gcr.io/$PROJECT_ID/docker-compose'
   args: ['exec','app','composer','install']
 
 - id: "Gerando arquivos de configuração do Laravel"
-  name: 'gcr.io/cloud-builders/docker-compose'
+  name: 'gcr.io/$PROJECT_ID/docker-compose'
   args: ['exec','app','cp','.env.example', '.env']
 
 - id: "Gerando chave do Laravel"
-  name: 'gcr.io/cloud-builders/docker-compose'
+  name: 'gcr.io/$PROJECT_ID/docker-compose'
   args: ['exec','app','php','/var/www/artisan', 'key:generate']
 
 - id: "Migrando banco de dados"
-  name: 'gcr.io/cloud-builders/docker-compose'
+  name: 'gcr.io/$PROJECT_ID/docker-compose'
   args: ['exec','app','php','/var/www/artisan', 'migrate']
 
 - id: "Executando testes"
-  name: 'gcr.io/cloud-builders/docker-compose'
+  name: 'gcr.io/$PROJECT_ID/docker-compose'
   args: ['exec','app','php','/var/www/vendor/bin/phpunit', '-c','/var/www/phpunit.xml']
