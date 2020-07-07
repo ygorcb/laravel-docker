@@ -1,8 +1,3 @@
-FROM composer as deps
-
-ADD . /app/
-RUN composer install
-
 FROM php:7.3-fpm-alpine 
 
 COPY . /var/www/
